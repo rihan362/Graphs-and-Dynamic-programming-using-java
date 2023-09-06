@@ -1,0 +1,55 @@
+
+class Solution
+{
+    static boolean check(int row, int col, int grid[][], int n){
+        
+        for(int i=0;i<9;i++){
+            if( grid[i][col] == n ) return false;
+            if( grid[row][i] == n ) return false;
+        }
+        
+        int g_row = (row/3)*3;
+        int g_col = (col/3)*3;
+        
+        for(int i=g_row;i<g_row+3;i++){
+            for(int j=g_col;j<g_col+3;j++){
+                if( grid[i][j] == n ) return false;
+            }
+        }
+        
+        return true;
+        
+    }
+     
+    static boolean SolveSudoku(int grid[][])
+    {
+       for(int row=0;row<9;row++){
+           for(int col=0;col<9;col++){
+               if(grid[row][col]==0){
+                   
+                   for(int n=1;n<=9;n++){
+                       if(check(row, col, grid, n)){
+                           grid[row][col] = n;
+                           if(SolveSudoku(grid)) return true;
+                           grid[row][col] = 0;
+                       }
+                   }
+                   return false;
+                   
+               }
+           }
+       }
+       return true;
+    }
+    
+    static void printGrid (int grid[][])
+    {
+        SolveSudoku(grid);
+        
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                System.out.print(grid[i][j]+" ");
+            }
+        }
+    }
+}
