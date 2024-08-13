@@ -1,0 +1,51 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int ans=solve(a,n);
+        System.out.println(ans);
+    }
+    
+    static int solve(int a[],int n)
+    {
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==0)
+            {
+                a[i]=-1;
+            }
+        }
+        HashMap<Integer,Integer> map=new HashMap<>();
+        
+        map.put(0,-1);
+        
+        int maxlength=0;
+        int cumsum=0;
+        for(int i=0;i<n;i++)
+        {
+            cumsum+=a[i];
+            if(map.containsKey(cumsum))
+            {
+                int previndex=map.get(cumsum);
+                int subarraylength=i-previndex;
+                maxlength=Math.max(maxlength,subarraylength);
+            
+            
+            }
+            else
+            {
+                map.put(cumsum,i);
+            }
+        }
+        
+        return maxlength;
+    }
+}
