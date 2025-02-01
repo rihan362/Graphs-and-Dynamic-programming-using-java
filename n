@@ -1,0 +1,65 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String st=sc.nextLine();
+		
+		int n=sc.nextInt();
+		
+		if(!isValidPassword(st))
+		{
+		    System.out.println("Invalid password");
+		    return;
+		}
+		
+		String ans=modify(st,n);
+		System.out.println(ans);
+	}
+	
+	public static boolean isValidPassword(String st)
+	{
+	    if(st.length()<8)
+	    {
+	        return false;
+	    }
+	    
+	    boolean hasupper=false;
+	    boolean haslower=false;
+	    
+	    boolean hasdigit=false;
+	    boolean hasspecial=false;
+	    String specialchar="@#";
+	    
+	    for(char ch:st.toCharArray())
+	    {
+	        if(Character.isUpperCase(ch))hasupper=true;
+	        else if(Character.isLowerCase(ch))haslower=true;
+	        
+	        else if(Character.isDigit(ch))hasdigit=true;
+	            else if (specialchar.indexOf(ch) != -1) hasspecial = true;
+	        
+	        
+	    }
+	    return hasupper&&haslower&&hasspecial&&hasdigit;
+	    
+	}
+	
+	public static String modify(String st,int n)
+	{
+	    StringBuilder sb=new StringBuilder();
+	    for(char ch:st.toCharArray())
+	    {
+	        sb.append((char)(ch+n));
+	    }
+	    return sb.toString();
+	}
+	
+}
